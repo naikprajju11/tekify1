@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/4e5e74ae6e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div class="container">
+    <div class="form-box">
+        <h1 id="title">Sign Up</h1>
+        <form id="loginForm">
+            <div class="input-g">
+                <div class="input-f">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="text" id="username" placeholder="Username">
+                </div>
+                <div class="input-f">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+            </div>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+            <div id="success-message" style="color: green; margin-top: 10px;"></div>
+            
+            <div class="btn-f">
+                <button type="submit" id="signupBtn">Sign Up</button>
+            </div>
+        </form>
+    </div>
+   </div>
+   <script>
+       document.getElementById('loginForm').addEventListener('submit', function(event) {
+           event.preventDefault(); // Prevent form submission
+
+           const predefinedUsername = 'teck';
+           const predefinedPassword = 'teck12';
+
+           const username = document.getElementById('username').value;
+           const password = document.getElementById('password').value;
+
+           const errorMessage = document.getElementById('error-message');
+           const successMessage = document.getElementById('success-message');
+
+           if (username === predefinedUsername && password === predefinedPassword) {
+               errorMessage.textContent = ''; // Clear any previous error messages
+               successMessage.innerHTML = 'EXPLORE NOW';
+               // Redirect to another page or perform any other action on successful login
+               setTimeout(() => {
+                   window.location.href = 'again.html'; // Redirect to again.html
+               }, 2000); // 2 second delay
+           } else {
+               successMessage.textContent = ''; // Clear any success messages
+               errorMessage.textContent = 'Invalid username or password';
+           }
+       });
+   </script>
+</body>
+</html>

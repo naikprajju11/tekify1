@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Sums</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image:url(captchaback.jpg);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+        #problem {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        #answer {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #submit, #continue-button {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        #submit {
+            background-color: #007bff;
+        }
+        #continue-button {
+            background-color: #28a745;
+            display: none;
+        }
+        .feedback.correct {
+            color: green;
+            font-size: 1.25rem;
+        }
+        .feedback.incorrect {
+            color: red;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="pass">
+    <div class="container">
+        <div id="problem"></div>
+        <input type="text" id="answer" placeholder="Your answer">
+        <button id="submit">Submit</button>
+        <div id="feedback"></div>
+        <button id="continue-button">Continue</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function generateRandomSum() {
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                return { question: `${num1} + ${num2}`, answer: (num1 + num2).toString() };
+            }
+
+            const problemElement = document.getElementById('problem');
+            const answerInput = document.getElementById('answer');
+            const submitButton = document.getElementById('submit');
+            const continueButton = document.getElementById('continue-button');
+            const feedbackElement = document.getElementById('feedback');
+
+            let correctAnswer;
+
+            function displayQuestion() {
+                const { question, answer } = generateRandomSum();
+                problemElement.textContent = question;
+                correctAnswer = answer;
+                feedbackElement.textContent = ''; // Clear previous feedback
+                submitButton.style.display = 'block'; // Show Submit button
+                continueButton.style.display = 'none'; // Hide Continue button
+                answerInput.style.display = 'block'; // Show answer input
+                answerInput.value = ''; // Clear the input field
+            }
+
+            displayQuestion();
+
+            submitButton.addEventListener('click', () => {
+                const userAnswer = answerInput.value.trim();
+                if (userAnswer === correctAnswer) {
+                    feedbackElement.innerHTML = 'You Nailed it!<br>ID: teck<br>PASS: teck12';
+                    feedbackElement.className = 'feedback correct';
+                    submitButton.style.display = 'none'; // Hide Submit button
+                    answerInput.style.display = 'none'; // Hide answer input
+                    problemElement.style.display = 'none'; // Hide question
+                    continueButton.style.display = 'block'; // Show Continue button
+                } else {
+                    feedbackElement.textContent = `Sorry, that's not correct. The correct answer was ${correctAnswer}.`;
+                    feedbackElement.className = 'feedback incorrect';
+                }
+            });
+
+            continueButton.addEventListener('click', () => {
+                window.location.href = 'login.html'; // Redirect to login.html
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>
